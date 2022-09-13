@@ -1,0 +1,20 @@
+clients_table- id,licence,os,uuid 
+//        try {  
+//query="insert into clients_tbl values("+db.getNewId("id", "clients_tbl")+",'E5F249-38D92E-9C095C-3C3D20-B7EC38-B5FEB5-A0BD','"+getUUID()[0]+"','"+getUUID()[1]+"')";
+//        db.executeQueryData(query, "Updated");
+//        } catch (IOException ex) {
+//            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+public String[] getUUID() throws IOException {
+            String uuid="";
+        if (OS.indexOf("win") >= 0) {
+            uuid= Runtime.getRuntime().exec("wmic csproduct get UUID").pid()+"";
+        } else if (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0) {
+           uuid= Runtime.getRuntime().exec("cat /sys/class/dmi/id/product_uuid").pid()+"";
+        }
+        System.out.println(uuid);
+        String[] res={OS,uuid};
+        return res;
+       
+    }
